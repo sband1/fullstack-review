@@ -31,4 +31,5 @@ let save = (queryArr, callback) => {
 
 }
 
+module.exports.Repo = Repo;
 module.exports.save = save;
