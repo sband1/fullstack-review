@@ -11,7 +11,22 @@ class App extends React.Component {
     this.state = {
       repos: []
     }
+  }
 
+  componentDidMount() {
+    this.getReposAndSetState();
+  }
+
+  getReposAndSetState() {
+    axios({
+      method: 'get',
+      url: 'repos'
+    })
+    .then((response) => {
+      console.log('getReposAndSetState', response.data)
+      this.setState({repos: response.data})
+    })
+    .catch((err) => console.log(err));
   }
 
   search (term) {
@@ -23,6 +38,11 @@ class App extends React.Component {
         username: term,
       }
     })
+    .then((response) => {
+      console.log(response);
+      this.getReposAndSetState();
+    })
+    .catch((err) => console.log(err));
   }
 
   render () {
